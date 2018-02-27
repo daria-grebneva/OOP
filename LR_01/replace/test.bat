@@ -12,6 +12,10 @@ REM запуск программы с несуществующим названием input файла
 %PROGRAM% inputNotExist.txt output.txt "lala" "zuzuz"
 IF NOT ERRORLEVEL 1 GOTO err  
 
+REM запуск программы с несуществующей в тексте строкой 
+%PROGRAM% test\input1.txt output.txt "skksks" "zuzuz"                                  
+IF NOT ERRORLEVEL 1 GOTO err  
+
 REM запуск программы с нулевой искомой строкой 
 %PROGRAM% test\input1.txt output.txt "" "zuzuz"                                  
 IF ERRORLEVEL 1 GOTO err 
@@ -42,7 +46,11 @@ IF ERRORLEVEL 1 GOTO err
 FC output.txt test\outputStringOfNumbers.txt 
 IF ERRORLEVEL 1 GOTO err 
                          
-
+REM запуск программы с заменой искомой строки на нулевую строку 
+REM %PROGRAM% test\input1.txt output.txt "Hello" " I'm happy! "                                  
+REM IF ERRORLEVEL 1 GOTO err 
+REM FC output.txt test\outputStringOfNumbers.txt 
+REM IF ERRORLEVEL 1 GOTO err
 
 
                            

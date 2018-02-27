@@ -1,15 +1,23 @@
 set PROGRAM="%~1"
 
 REM запуск программы без параметров           
-REM %PROGRAM%                            
-REM IF NOT ERRORLEVEL 1 GOTO err  
+%PROGRAM%                            
+IF NOT ERRORLEVEL 1 GOTO err  
 
 REM запуск программы с пустой строкой в качестве одного из параметров 
-REM %PROGRAM% ""   
-REM IF NOT ERRORLEVEL 1 GOTO err  
+%PROGRAM% ""   
+IF NOT ERRORLEVEL 1 GOTO err  
 
 REM выход за границы диапазона 
 %PROGRAM% 256 > output.txt                                 
+IF NOT ERRORLEVEL 1 GOTO err
+
+REM переполнение 
+%PROGRAM% 252939393393928272936 > output.txt                                 
+IF NOT ERRORLEVEL 1 GOTO err
+
+REM отрицательное значение 
+%PROGRAM% -15 > output.txt                                 
 IF NOT ERRORLEVEL 1 GOTO err
 
 REM передача нечислового параметра 
