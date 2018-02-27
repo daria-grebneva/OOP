@@ -14,7 +14,9 @@ IF NOT ERRORLEVEL 1 GOTO err
 
 REM запуск программы с несуществующей в тексте строкой 
 %PROGRAM% test\input1.txt output.txt "skksks" "zuzuz"                                  
-IF NOT ERRORLEVEL 1 GOTO err  
+IF ERRORLEVEL 1 GOTO err 
+FC output.txt test\outputNotExistString.txt 
+IF ERRORLEVEL 1 GOTO err  
 
 REM запуск программы с нулевой искомой строкой 
 %PROGRAM% test\input1.txt output.txt "" "zuzuz"                                  
