@@ -47,14 +47,6 @@ REM запуск программы с заменой искомой строки на нулевую строку
 IF ERRORLEVEL 1 GOTO err 
 FC output.txt test\outputStringOfNumbers.txt 
 IF ERRORLEVEL 1 GOTO err 
-                         
-REM запуск программы с заменой искомой строки на нулевую строку 
-REM %PROGRAM% test\input1.txt output.txt "Hello" " I'm happy! "                                  
-REM IF ERRORLEVEL 1 GOTO err 
-REM FC output.txt test\outputStringOfNumbers.txt 
-REM IF ERRORLEVEL 1 GOTO err
-
-
                            
 ECHO Program testing succeeded :-)                  
 EXIT                                                
