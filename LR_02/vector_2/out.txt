@@ -1,0 +1,2 @@
+Please, enter your array. Example: 
+12.45 8.9 23.44
