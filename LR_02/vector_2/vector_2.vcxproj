@@ -98,8 +98,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>test.bat "$(TargetPath)"</Command>
       <Message>running tests</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -117,8 +116,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>test.bat "$(TargetPath)"</Command>
       <Message>running tests</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -140,8 +138,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>test.bat "$(TargetPath)"</Command>
       <Message>running tests</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
@@ -163,8 +160,7 @@
       <GenerateDebugInformation>true</GenerateDebugInformation>
     </Link>
     <PostBuildEvent>
-      <Command>
-      </Command>
+      <Command>test.bat "$(TargetPath)"</Command>
       <Message>running tests</Message>
     </PostBuildEvent>
   </ItemDefinitionGroup>
