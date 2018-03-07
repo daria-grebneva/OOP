@@ -5,6 +5,8 @@ VisualStudioVersion = 15.0.27130.2026
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector_2", "vector_2\vector_2.vcxproj", "{5BBFA5CB-602E-425A-8586-4E7A81D8DC3F}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decode_HTML", "decode_HTML\decode_HTML.vcxproj", "{D9F630AA-151F-436C-ABE3-CD4858B13E77}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -21,6 +23,14 @@ Global
 		{5BBFA5CB-602E-425A-8586-4E7A81D8DC3F}.Release|x64.Build.0 = Release|x64
 		{5BBFA5CB-602E-425A-8586-4E7A81D8DC3F}.Release|x86.ActiveCfg = Release|Win32
 		{5BBFA5CB-602E-425A-8586-4E7A81D8DC3F}.Release|x86.Build.0 = Release|Win32
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Debug|x64.ActiveCfg = Debug|x64
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Debug|x64.Build.0 = Debug|x64
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Debug|x86.ActiveCfg = Debug|Win32
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Debug|x86.Build.0 = Debug|Win32
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Release|x64.ActiveCfg = Release|x64
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Release|x64.Build.0 = Release|x64
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Release|x86.ActiveCfg = Release|Win32
+		{D9F630AA-151F-436C-ABE3-CD4858B13E77}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

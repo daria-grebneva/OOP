@@ -17,7 +17,7 @@ REM переполнение
 IF NOT ERRORLEVEL 1 GOTO err
 
 REM отрицательное значение 
-%PROGRAM% -15 > output.txt                                 
+%PROGRAM% -151 > output.txt                                 
 IF NOT ERRORLEVEL 1 GOTO err
 
 REM передача нечислового параметра 
