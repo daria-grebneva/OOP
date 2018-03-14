@@ -11,6 +11,8 @@ Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "vector_2_tests", "vector_2_
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "decode_HTML_tests", "decode_HTML_tests\decode_HTML_tests.vcxproj", "{24509B90-BA8A-4866-9705-14264EAD8155}"
 EndProject
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dictionary", "Dictionary\Dictionary.vcxproj", "{7CD03338-DD2F-4BB9-965F-A36260A4A785}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x64 = Debug|x64
@@ -51,6 +53,14 @@ Global
 		{24509B90-BA8A-4866-9705-14264EAD8155}.Release|x64.Build.0 = Release|x64
 		{24509B90-BA8A-4866-9705-14264EAD8155}.Release|x86.ActiveCfg = Release|Win32
 		{24509B90-BA8A-4866-9705-14264EAD8155}.Release|x86.Build.0 = Release|Win32
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Debug|x64.ActiveCfg = Debug|x64
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Debug|x64.Build.0 = Debug|x64
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Debug|x86.ActiveCfg = Debug|Win32
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Debug|x86.Build.0 = Debug|Win32
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Release|x64.ActiveCfg = Release|x64
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Release|x64.Build.0 = Release|x64
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Release|x86.ActiveCfg = Release|Win32
+		{7CD03338-DD2F-4BB9-965F-A36260A4A785}.Release|x86.Build.0 = Release|Win32
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
