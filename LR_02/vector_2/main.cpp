@@ -5,8 +5,7 @@ using namespace std;
 
 int main()
 {
-	vector<double> vectorDoubleNumbers;
-	ReadVector(vectorDoubleNumbers);
+	vector<double> vectorDoubleNumbers = ReadVector();
 	ProcessVector(vectorDoubleNumbers);
 	sort(vectorDoubleNumbers.begin(), vectorDoubleNumbers.end());
 	PrintVector(vectorDoubleNumbers);
