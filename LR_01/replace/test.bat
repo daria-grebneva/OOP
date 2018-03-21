@@ -43,7 +43,7 @@ FC output.txt test\outputMaToEmptyString.txt
 IF ERRORLEVEL 1 GOTO err 
 
 REM запуск программы с заменой искомой строки на нулевую строку 
-%PROGRAM% test\input2.txt output.txt "1231234" " I'm happy! "                                  
+%PROGRAM% test\input2.txt output.txt "1231234" "123"                                  
 IF ERRORLEVEL 1 GOTO err 
 FC output.txt test\outputStringOfNumbers.txt 
 IF ERRORLEVEL 1 GOTO err 
