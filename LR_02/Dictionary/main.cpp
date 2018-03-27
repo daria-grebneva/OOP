@@ -9,42 +9,25 @@ int main(int argc, char* argv[])
 	SetConsoleCP(1251);
 	SetConsoleOutputCP(1251);
 
-	if (!IsValidArgumentsCount(argc))
+	if (argc != ARG_COUNT)
 	{
-		cout << "Wrong number of arguments" << endl;
+		cout << "Please enter the name of the dictionary: <dictionary.txt>" << endl;
 		return 1;
 	}
+
 	string inputFileName = argv[1];
+
 	if (!IsFileExist(inputFileName))
 	{
-		cout << "Dictionary file was not found" << endl;
-		return 1;
+		ofstream dictionaryFile(inputFileName);
 	}
 
-	MMAP_STRING_STRING dictionary;
+	Dictionary dictionary;
+	bool isNewWord = false;
 
 	ReadDictionaryFromFile(inputFileName, dictionary);
+	ReadWordAndProcess(dictionary, isNewWord);
+	UpdateDictionary(inputFileName, isNewWord, dictionary);
 
-	string word;
-	bool isNewWord = false;
-	stringstream buf;
-	while (getline(cin, word) && (word != EXIT_STRING))
-	{
-		transform(word.begin(), word.end(), word.begin(), ::tolower);
-		CommunicateWithUser(word, dictionary, isNewWord);
-	}
-
-	if (isNewWord)
-	{
-		if (IsNeedToSave())
-		{
-			fstream clear_file(inputFileName, ios::out);
-			ofstream fout(inputFileName);
-			for (const auto& e : dictionary)
-			{
-				fout << e.first << endl;
-				fout << e.second << endl;
-			}
-		}
-	}
+	return 0;
 }

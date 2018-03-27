@@ -21,15 +21,12 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="fill.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="fill.cpp">
+    <ClCompile Include="URL_parser_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>

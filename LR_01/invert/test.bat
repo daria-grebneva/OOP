@@ -29,6 +29,12 @@ REM запуск третьего теста
 IF ERRORLEVEL 1 GOTO err 
 FC output.txt test\output3.txt 
 IF ERRORLEVEL 1 GOTO err  
+    
+REM тест на детерминант, равный 0 
+%PROGRAM% test\input4.txt > output.txt                                 
+IF ERRORLEVEL 1 GOTO err 
+FC output.txt test\output4.txt 
+IF ERRORLEVEL 1 GOTO err  
                            
 ECHO Program testing succeeded :-)                  
 EXIT                                                

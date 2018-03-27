@@ -1,16 +1,15 @@
 #pragma once
 
-#include "stdafx.h";
-
 using namespace std;
-typedef multimap<string, string> MMAP_STRING_STRING;
+typedef multimap<string, string> Dictionary;
+const unsigned ARG_COUNT = 2;
 
 const string EXIT_STRING = "...";
 
-bool IsValidArgumentsCount(int argc);
-bool IsFileExist(std::string& fileName);
-void CommunicateWithUser(const string& word, MMAP_STRING_STRING& dictionary, bool& isNewWord);
-bool IsNeedToSave();
-void ReadDictionaryFromFile(const string& inputFileName, MMAP_STRING_STRING& dictionary);
-string FindWordInDictionary(const string& word, MMAP_STRING_STRING& dictionary);
-bool IsNewWord(const string& word, MMAP_STRING_STRING& dictionary);
+bool IsFileExist(const string& fileName);
+void ProcessEnteredWord(const string& word, Dictionary& dictionary, bool& isNewWord);
+void ReadDictionaryFromFile(const string& inputFileName, Dictionary& dictionary);
+string FindWordInDictionary(const string& word, Dictionary& dictionary);
+bool IsNewWordSaved(const string& word, Dictionary& dictionary);
+void ReadWordAndProcess(Dictionary& dictionary, bool& isNewWord);
+void UpdateDictionary(const string & inputFileName, bool isNewWord, Dictionary& dictionary);
