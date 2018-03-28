@@ -16,10 +16,16 @@ EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "Dictionary_tests", "Dictionary_tests\Dictionary_tests.vcxproj", "{683BB13B-6696-4A8F-9F70-0A71C17508EF}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrimeNumbers", "PrimeNumbers\PrimeNumbers.vcxproj", "{953FC7F9-7E05-41D0-A8BF-941B63E2BF6E}"
+	ProjectSection(ProjectDependencies) = postProject
+		{513F60A8-8DD0-4754-A42E-EA89CC981A81} = {513F60A8-8DD0-4754-A42E-EA89CC981A81}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "PrimeNumbers_test", "PrimeNumbers_test\PrimeNumbers_test.vcxproj", "{513F60A8-8DD0-4754-A42E-EA89CC981A81}"
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "URL_parser", "URL_parser\URL_parser.vcxproj", "{CF41EC1A-3BE4-4468-A279-2C1EB2DC1492}"
+	ProjectSection(ProjectDependencies) = postProject
+		{37AFFBEA-C266-4A13-91A7-86CE4CD551AC} = {37AFFBEA-C266-4A13-91A7-86CE4CD551AC}
+	EndProjectSection
 EndProject
 Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "URL_parser_tests", "URL_parser_tests\URL_parser_tests.vcxproj", "{37AFFBEA-C266-4A13-91A7-86CE4CD551AC}"
 EndProject

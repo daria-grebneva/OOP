@@ -4,22 +4,29 @@
 
 using namespace std;
 
+void ShowUsage()
+{
+	cout << "Usage: prime_generator.exe <upper bound>" << endl;
+	cout << MIN_UPPER_BOUND << " <= <upper bound> <= " << MAX_UPPER_BOUND << endl;
+}
+
 int main(int argc, char* argv[])
 {
 	if (argc != 2)
 	{
-		ShowInstruction();
+		ShowUsage();
 		return 1;
 	}
 
 	int upperBound;
-	if (!CheckInputNumber(argv[1], upperBound))
+	
+	if (!ParseUpperBound(argv[1], upperBound))
 	{
-		ShowInstruction();
+		ShowUsage();
 		return 1;
 	}
 
-	set<int> primeNumbers = GeneratePrimeNumbersSet(upperBound);
+	auto primeNumbers = GetPrimeNumbersSet(upperBound);
 	PrintPrimeNumbers(primeNumbers);
 
 	return 0;
