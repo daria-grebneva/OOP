@@ -43,7 +43,7 @@ struct Field
 };
 
 void InitOutline(Field& field);
-bool ReadOutlineFromFile(const string& inputFileName, stack<Position>& startPositions, Field& field);
-void Fill(stack<Position>& startPositions, Field& field);
+bool ReadOutlineFromFile(const std::string& inputFileName, std::stack<Position>& startPositions, Field& field);
+void Fill(std::stack<Position>& startPositions, Field& field);
 void PrintField(std::ostream& output, const Field& field);
 void ShowExampleInput();
