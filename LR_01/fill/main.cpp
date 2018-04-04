@@ -18,7 +18,7 @@ int main(int argc, char* argv[])
 	InitOutline();
 
 	stack<Position> startPositions;
-	if (OpenFileAndReadOutline(inputFileName, startPositions))
+	if (ReadOutlineFromFile(inputFileName, startPositions))
 	{
 		Fill(startPositions);
 		PrintField(output);

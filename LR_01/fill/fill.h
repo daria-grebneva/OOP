@@ -32,7 +32,7 @@ const Offset OFFSETS[OFFSET_SIZE] = {
 
 bool IsTheNumberOfArgumentsCorrect(int argc);
 void InitOutline();
-bool OpenFileAndReadOutline(const std::string& inputFileName, std::stack<Position>& startPositions);
+bool ReadOutlineFromFile(const std::string& inputFileName, std::stack<Position>& startPositions);
 void Fill(std::stack<Position>& startPositions);
 void PrintField(std::ostream& output);
 void ShowExampleInput();
