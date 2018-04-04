@@ -4,6 +4,17 @@
 
 using namespace std;
 
+bool IsTheNumberOfArgumentsCorrect(int argc)
+{
+	if (argc != 3)
+	{
+		cout << "The input data is invalid." << endl;
+		ShowExampleInput();
+		return false;
+	}
+	return true;
+}
+
 int main(int argc, char* argv[])
 {
 	if (!IsTheNumberOfArgumentsCorrect(argc))
@@ -15,13 +26,14 @@ int main(int argc, char* argv[])
 	string outputFileName = argv[2];
 
 	ofstream output(outputFileName);
-	InitOutline();
+	Field field;
+	InitOutline(field);
 
 	stack<Position> startPositions;
-	if (ReadOutlineFromFile(inputFileName, startPositions))
+	if (ReadOutlineFromFile(inputFileName, startPositions, field))
 	{
-		Fill(startPositions);
-		PrintField(output);
+		Fill(startPositions, field);
+		PrintField(output, field);
 	}
 	else
 	{

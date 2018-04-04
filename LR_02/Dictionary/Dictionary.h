@@ -3,10 +3,7 @@
 using namespace std;
 typedef multimap<string, string> Dictionary;
 
-static const unsigned ARG_COUNT = 2;
-static const string EXIT_STRING = "...";
-
-bool IsFileExist(const string& fileName);
+//bool IsFileExist(const string& fileName);
 void ProcessEnteredWord(const string& word, Dictionary& dictionary, bool& isNewWord);
 void ReadDictionaryFromFile(const string& inputFileName, Dictionary& dictionary);
 string FindWordInDictionary(const string& word, Dictionary& dictionary);

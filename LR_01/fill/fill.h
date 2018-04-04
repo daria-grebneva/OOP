@@ -1,9 +1,7 @@
 #pragma once
 
-const int MAX_SIZE = 102;
-const int OFFSET_SIZE = 4;
-//!!!!
-char outline[MAX_SIZE][MAX_SIZE];
+static const int MAX_SIZE = 102;
+static const int OFFSET_SIZE = 4;
 
 struct Position
 {
@@ -30,9 +28,22 @@ const Offset OFFSETS[OFFSET_SIZE] = {
 	{ -1, 0 }
 };
 
-bool IsTheNumberOfArgumentsCorrect(int argc);
-void InitOutline();
-bool ReadOutlineFromFile(const std::string& inputFileName, std::stack<Position>& startPositions);
-void Fill(std::stack<Position>& startPositions);
-void PrintField(std::ostream& output);
+enum CellType : char
+{
+	EMPTY = ' ',
+	WALL = '#',
+	START = 'O',
+	FILLED = '.',
+	IN_QUEUE = '$',
+};
+
+struct Field
+{
+	CellType outline[MAX_SIZE][MAX_SIZE];
+};
+
+void InitOutline(Field& field);
+bool ReadOutlineFromFile(const string& inputFileName, stack<Position>& startPositions, Field& field);
+void Fill(stack<Position>& startPositions, Field& field);
+void PrintField(std::ostream& output, const Field& field);
 void ShowExampleInput();

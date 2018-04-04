@@ -3,6 +3,7 @@
 
 using namespace std;
 
+static const unsigned ARG_COUNT = 2;
 int main(int argc, char* argv[])
 {
 	std::locale::global(std::locale("rus"));
@@ -16,11 +17,6 @@ int main(int argc, char* argv[])
 	}
 
 	string inputFileName = argv[1];
-
-	if (!IsFileExist(inputFileName))
-	{
-		ofstream dictionaryFile(inputFileName);
-	}
 
 	Dictionary dictionary;
 	bool isNewWord = false;
