@@ -3,8 +3,6 @@
 class CTVSet
 {
 public:
-	CTVSet();
-	~CTVSet();
 	bool IsTurnedOn() const;
 	void TurnOn();
 	void TurnOff();

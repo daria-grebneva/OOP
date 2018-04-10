@@ -18,12 +18,14 @@ int main(int argc, char* argv[])
 
 	string inputFileName = argv[1];
 
-	Dictionary dictionary;
 	bool isNewWord = false;
 
-	ReadDictionaryFromFile(inputFileName, dictionary);
+	Dictionary dictionary = ReadDictionaryFromFile(inputFileName);
 	ReadWordAndProcess(dictionary, isNewWord);
-	UpdateDictionary(inputFileName, isNewWord, dictionary);
+	if (IsNeedToUpdate(isNewWord))
+	{
+		UpdateDictionary(inputFileName, dictionary);
+	}
 
 	return 0;
 }

@@ -2,7 +2,19 @@
 #include "CTVSet.h"
 #include "RemoteControl.h"
 
+using namespace std;
+
 int main()
 {
-	return 0;
+	CTVSet tv;
+	CRemoteControl remoteControl(tv, cin, cout);
+
+	while (!cin.eof() && !cin.fail())
+	{
+		cout << "> ";
+		if (!remoteControl.HandleCommand())
+		{
+			cout << "Unknown command!" << endl;
+		}
+	}
 }
