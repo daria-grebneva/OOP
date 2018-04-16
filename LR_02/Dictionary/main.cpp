@@ -22,7 +22,7 @@ int main(int argc, char* argv[])
 
 	Dictionary dictionary = ReadDictionaryFromFile(inputFileName);
 	ReadWordAndProcess(dictionary, isNewWord);
-	if (IsNeedToUpdate(isNewWord))
+	if (isNewWord)
 	{
 		UpdateDictionary(inputFileName, dictionary);
 	}

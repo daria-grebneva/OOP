@@ -5,7 +5,8 @@
 #include <map>
 #include <string>
 
-typedef map<std::string, double> valiousMap;
+//typedef map<std::string, double> value;
+
 struct functionValue
 {
 	std::string operation;
@@ -19,7 +20,7 @@ class CFunction
 public:
 	CFunction();
 	~CFunction();
-	std::string GetName() const;
+
 	double GetResult() const;
 	double Calculate(double firstArgument, double secondArgument, char operation);
 
@@ -28,16 +29,19 @@ public:
 	bool CreateNewFunction(std::string identificator1, std::string identificator2, char operation, std::string identificator3);
 
 	void SetValue(const std::string& identifier, functionValue result);
+	functionValue GetValueForFunctionMap(std::string nameOfAddedFunction);
 
 private:
-	valiousMap m_values;
 	functionMap m_functions;
-	std::string m_functionName;
+
 	double m_result = NAN;
 };
 //TODO:: 1) enum class of operations.
 //2) char to enum + enum to char functions
 enum Operation : char
 {
-
+	DIV = '/',
+	MUL = '*',
+	SUB = '-',
+	ADD = '+',
 };

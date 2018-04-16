@@ -21,5 +21,5 @@ private:
 	double m_value = NAN;
 	variablesMap m_variables;
 
-	void CreateLet(string identifierName, double result);
+	void CreateLet(std::string identifierName, double result);
 };
