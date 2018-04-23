@@ -1,47 +1,36 @@
 #pragma once
-
 #include "Variable.h"
-#include <iostream>
-#include <map>
-#include <string>
 
-//typedef map<std::string, double> value;
+typedef std::map<std::string, double> variablesMap;
 
 struct functionValue
 {
-	std::string operation;
-	double result = 0;
+	std::string operation = "";
+	double value = 0;
 };
 
-typedef map<string, functionValue> functionMap;
+typedef std::map<std::string, functionValue> functionMap;
 
 class CFunction
 {
 public:
-	CFunction();
+	CFunction(CVariable* myVariables);
 	~CFunction();
-
-	double GetResult() const;
-	double Calculate(double firstArgument, double secondArgument, char operation);
-
-	functionValue GetValue(std::string name);
-	bool CreateNewFunction(std::string identificator1, std::string identificator2);
-	bool CreateNewFunction(std::string identificator1, std::string identificator2, char operation, std::string identificator3);
-
-	void SetValue(const std::string& identifier, functionValue result);
-	functionValue GetValueForFunctionMap(std::string nameOfAddedFunction);
+	void CreateFunction(std::string, std::string);
+	void CreateFunction(std::string, std::string, char, std::string);
+	std::pair<std::string, functionValue> GetFunctionValue(std::string);
+	functionMap GetFunctionValues();
+	functionValue GetValueForFunctionMap(std::string);
 
 private:
-	functionMap m_functions;
+	CVariable* m_variablesPtr;
+	functionMap m_functionMap;
+	bool m_isFoundInMap = false;
 
-	double m_result = NAN;
-};
-//TODO:: 1) enum class of operations.
-//2) char to enum + enum to char functions
-enum Operation : char
-{
-	DIV = '/',
-	MUL = '*',
-	SUB = '-',
-	ADD = '+',
+	double MakeOperation(char, double, double);
+	void UpdateValues(std::string);
+	bool InitializeExpression(std::string, std::string&, std::string&, char&);
+	bool CanGetFunction(std::string functionName);
+	void UpdateValue(std::string valueName, functionValue& value, std::pair<std::string, functionValue> mapElement);
+	bool InitializeOperation(std::string, char&);
 };

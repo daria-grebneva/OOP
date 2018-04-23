@@ -7,4 +7,4 @@ const int MIN_UPPER_BOUND = 2;
 
 bool ParseUpperBound(const string& inputString, int& number);
 set<int> GetPrimeNumbersSet(int upperBound);
-void PrintPrimeNumbers(set<int>& primeNumbers);
+void PrintPrimeNumbers(const set<int>& primeNumbers);

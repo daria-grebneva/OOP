@@ -30,6 +30,9 @@
     <ClInclude Include="..\Calculator\Function.h">
       <Filter>Header Files</Filter>
     </ClInclude>
+    <ClInclude Include="..\Calculator\CalculatorController.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="stdafx.cpp">
@@ -48,6 +51,9 @@
       <Filter>Source Files</Filter>
     </ClCompile>
     <ClCompile Include="..\Calculator\Variable.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="..\Calculator\CalculatorController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
