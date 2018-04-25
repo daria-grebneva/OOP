@@ -67,9 +67,14 @@ bool CRemoteControl::SelectChannel(std::istream& args)
 	{
 		m_output << "Can't select channel because TV is turned off\n";
 	}
-	if (m_tv.IsTurnedOn() && ((channel < 1) || (channel > 99)))
+	else if (m_tv.IsTurnedOn() && ((channel < 1) || (channel > 99)))
 	{
 		m_output << "Invalid channel\n";
+	}
+	else
+	{
+		m_tv.SelectChannel(channel);
+		m_output << "Channel selected" << std::endl;
 	}
 	return true;
 }
