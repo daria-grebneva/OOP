@@ -7,10 +7,10 @@ class CVariable
 public:
 	CVariable();
 	~CVariable();
-	bool CanGetVariable(std::string variableName);
-	double GetVariable(std::string variableName) const;
+	bool CanGetVariable(const std::string& variableName);
+	double GetVariable(const std::string& variableName) const;
 	variablesMap GetVariables() const;
-	int CreateVariable(std::string identifier);
+	bool CreateVariable(const std::string& identifier);
 	void ChangeVariableValue(std::string fisrtVariableName, std::string secondVariableName);
 	void ChangeVariableValue(std::string variableName, double value);
 	double isUpdated = false;

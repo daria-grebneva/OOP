@@ -35,6 +35,7 @@ bool CFunction::CanGetFunction(string functionName)
 
 pair<string, functionValue> CFunction::GetFunctionValue(string NameOfFunction)
 {
+
 	pair<string, functionValue> pairForFunctionMap;
 	pairForFunctionMap.first = VALUE_IS_NOT_EXIST;
 	if (CanGetFunction(NameOfFunction))
@@ -63,6 +64,7 @@ functionMap CFunction::GetFunctionValues()
 		{
 			UpdateValues(x.first);
 		}
+
 		m_variablesPtr->SetUpdate(true);
 	}
 	return (m_functionMap);
@@ -104,8 +106,6 @@ void CFunction::UpdateValue(string valueName, functionValue& value, pair<string,
 		value.value = m_variablesPtr->GetVariable(valueName);
 	}
 }
-
-//!PROBLEMS
 
 void CFunction::UpdateValues(string updateLine)
 {

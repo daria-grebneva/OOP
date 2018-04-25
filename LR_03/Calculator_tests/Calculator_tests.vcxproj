@@ -159,7 +159,6 @@
     </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="..\Calculator\Calculator.h" />
     <ClInclude Include="..\Calculator\CalculatorController.h" />
     <ClInclude Include="..\Calculator\Function.h" />
     <ClInclude Include="..\Calculator\Variable.h" />
@@ -167,7 +166,6 @@
     <ClInclude Include="targetver.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="..\Calculator\Calculator.cpp" />
     <ClCompile Include="..\Calculator\CalculatorController.cpp" />
     <ClCompile Include="..\Calculator\Function.cpp" />
     <ClCompile Include="..\Calculator\Variable.cpp" />

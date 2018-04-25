@@ -51,7 +51,7 @@ void CCalculatorController::Print(string command) const
 		string valueName = command.substr(PRINT.length() + 1, command.length());
 
 		auto functionValueId = m_functions->GetFunctionValue(valueName);
-		//cout << "PRINT" << functionValueId.first << " " << functionValueId.second.value << endl;
+
 		if (m_variables->CanGetVariable(valueName))
 		{
 			cout << m_variables->GetVariable(valueName) << endl;
@@ -92,6 +92,7 @@ void CCalculatorController::PrintVars(string command) const
 
 void CCalculatorController::PrintFunctions(string command) const
 {
+
 	cout << fixed;
 	cout.precision(2);
 
@@ -116,16 +117,16 @@ void CCalculatorController::CreateVar(string command)
 		cout << "Duplicate identifier name" << endl;
 	else
 	{
-		int operationResult = m_variables->CreateVariable(valueName);
+		auto operationResult = m_variables->CreateVariable(valueName);
 		if (!IsCorrectIdentifier(valueName))
 		{
 			cout << "Wrong variable name" << endl;
 		}
 		else
 		{
-			if (operationResult == 0)
+			if (operationResult)
 				cout << "Variable \"" << valueName << "\" was successfully created" << endl;
-			else if (operationResult == 1)
+			else if (!operationResult)
 				cout << "An identifier with this name was previously created" << endl;
 		}
 	}

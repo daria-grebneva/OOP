@@ -7,26 +7,25 @@ CVariable::CVariable() = default;
 
 CVariable::~CVariable() = default;
 
-bool CVariable::CanGetVariable(std::string variableName)
+bool CVariable::CanGetVariable(const std::string& variableName)
 {
 	return (m_variables.find(variableName) != m_variables.end());
 }
 
-double CVariable::GetVariable(string variableName) const
+double CVariable::GetVariable(const std::string& variableName) const
 {
 	auto var = *m_variables.find(variableName);
 	return (var.second);
 }
 
-int CVariable::CreateVariable(string identifier)
+bool CVariable::CreateVariable(const std::string& identifier)
 {
 	if (!CanGetVariable(identifier))
 	{
 		m_variables.emplace(identifier, NAN);
-		return (0);
+		return true;
 	}
-	else
-		return (1);
+	return false;
 }
 
 variablesMap CVariable::GetVariables() const
@@ -48,7 +47,6 @@ void CVariable::ChangeVariableValue(string fisrtVariableName, string secondVaria
 {
 	m_isUpdated = false;
 
-	//!!
 	isUpdated = false;
 	if (fisrtVariableName != secondVariableName)
 	{
@@ -66,7 +64,6 @@ void CVariable::ChangeVariableValue(string variableName, double value)
 {
 	m_isUpdated = false;
 
-	//!!
 	isUpdated = false;
 	if (CanGetVariable(variableName))
 	{
