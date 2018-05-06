@@ -3,84 +3,106 @@
 
 using namespace std;
 
-void CCalculatorController::ShowUsage()
+CCalculatorController::CCalculatorController(std::istream& input, std::ostream& output)
+	: m_input(input)
+	, m_output(output)
 {
-	cout << PRINT << " <= to print value of variable or function" << endl;
-	cout << PRINT_VARS << " <= to print all of variables" << endl;
-	cout << PRINT_FUNCTIONS << " <= to print all of functions" << endl;
-	cout << CREATE_FUNCTION << " <= to create function" << endl;
-	cout << CREATE_VARS << " <= to create a var" << endl;
-	cout << CHANGE_VAR << " <= to change the value of existing var or create new witn value" << endl;
-	cout << EXIT << " <= to exit" << endl;
-	cout << SHOW_USAGE << " <= to show usage" << endl;
 }
 
-void CCalculatorController::ProcessCommand(string& command)
+void CCalculatorController::ShowUsage()
 {
-	if (command.find(CREATE_VARS) == 0)
+	m_output << PRINT << " <= to print value of variable or function" << endl;
+	m_output << PRINT_VARS << " <= to print all of variables" << endl;
+	m_output << PRINT_FUNCTIONS << " <= to print all of functions" << endl;
+	m_output << CREATE_FUNCTION << " <= to create function" << endl;
+	m_output << CREATE_VARS << " <= to create a var" << endl;
+	m_output << CHANGE_VAR << " <= to change the value of existing var or create new witn value" << endl;
+	m_output << EXIT << " <= to exit" << endl;
+	m_output << SHOW_USAGE << " <= to show usage" << endl;
+}
+
+bool CCalculatorController::ProcessCommand()
+{
+	std::string action;
+	getline(m_input, action);
+
+	if (action.find(CREATE_VARS) == 0)
 	{
-		CreateVar(command);
+		CreateVar(action);
 	}
-	else if (command.find(CHANGE_VAR) == 0)
+	else if (action.find(CHANGE_VAR) == 0)
 	{
-		ChangeVar(command);
+		ChangeVar(action);
 	}
-	else if (command.find(PRINT_VARS) == 0)
+	else if (action.find(PRINT_VARS) == 0)
 	{
-		PrintVars(command);
+		PrintVars(action);
 	}
-	else if (command.find(PRINT_FUNCTIONS) == 0)
+	else if (action.find(PRINT_FUNCTIONS) == 0)
 	{
-		PrintFunctions(command);
+		PrintFunctions(action);
 	}
-	else if (command.find(CREATE_FUNCTION) == 0)
+	else if (action.find(CREATE_FUNCTION) == 0)
 	{
-		CreateFunction(command);
+		CreateFunction(action);
 	}
-	else if (command.find(PRINT) == 0)
+	else if (action.find(PRINT) == 0)
 	{
-		Print(command);
+		Print(action);
+	}
+	else if (action.find(SHOW_USAGE) == 0)
+	{
+		ShowUsage();
+	}
+	else if (action.find(EXIT) == 0)
+	{
+		return false;
 	}
 	else
 	{
-		cout << "Command not found" << endl;
+		m_output << "Command not found" << endl;
 	}
+	return true;
 }
 
-void CCalculatorController::Print(const string& command)
+void CCalculatorController::Print(string& command)
 {
-	cout << fixed;
-	cout.precision(2);
+	m_output << fixed;
+	m_output.precision(2);
 	string value = command.substr(PRINT.length() + 1, command.length());
 
 	string identifierType = NONE;
 
 	if (m_calculator.GetIdentifierValue(value, identifierType).first != NOT_FOUND)
 	{
-		cout << m_calculator.GetIdentifierValue(value, identifierType).second << endl;
+		m_output << m_calculator.GetIdentifierValue(value, identifierType).second << endl;
 	}
 	else
 	{
-		cout << "Idenifier is not found" << endl;
+		m_output << "Idenifier is not found" << endl;
 	}
 }
 
 void CCalculatorController::PrintVars(const string& command) const
 {
+	m_output << fixed;
+	m_output.precision(2);
 	auto variables = m_calculator.GetAllVariable();
 	for (auto& var : variables)
 	{
-		cout << var.first << ' ' << var.second << endl;
+		m_output << var.first << ' ' << var.second << endl;
 	}
 }
 
 void CCalculatorController::PrintFunctions(const string& command)
 {
+	m_output << fixed;
+	m_output.precision(2);
 	auto functions = m_calculator.GetFunctionValues();
 	string identifierType = NONE;
 	for (auto& f : functions)
 	{
-		cout << f.first << ' ' << m_calculator.GetIdentifierValue(f.first, identifierType).second << endl;
+		m_output << f.first << ' ' << m_calculator.GetIdentifierValue(f.first, identifierType).second << endl;
 	}
 }
 
@@ -136,11 +158,11 @@ void CCalculatorController::PrintResultOfOperation(int result) const
 {
 	if (result == 1)
 	{
-		cout << "The name of the identifier is invalid" << endl;
+		m_output << "The name of the identifier is invalid" << endl;
 	}
 	else if (result == 2)
 	{
-		cout << "This identifier already exists" << endl;
+		m_output << "This identifier already exists" << endl;
 	}
 }
 

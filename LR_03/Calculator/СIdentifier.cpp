@@ -3,12 +3,12 @@
 
 using namespace std;
 
-variable CIdentifier::GetAllVariable() const
+variableMap CIdentifier::GetAllVariable() const
 {
 	return m_variables;
 }
 
-function CIdentifier::GetFunctionValues() const
+functionMap CIdentifier::GetFunctionValues() const
 {
 	return m_functions;
 }
@@ -260,7 +260,7 @@ void CIdentifier::CalculateFunctionValue(string function, double& value)
 	}
 	else
 	{
-		string identifierType = "none";
+		string identifierType = NONE;
 		value = GetIdentifierValue(mainOperation, identifierType).second;
 	}
 }

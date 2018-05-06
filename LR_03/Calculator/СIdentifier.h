@@ -5,8 +5,8 @@ const std::string NOT_FOUND = "Not found";
 const std::string VAR = "variable";
 const std::string FUNCTION = "function";
 
-typedef std::map<std::string, double> variable;
-typedef std::map<std::string, std::string> function;
+typedef std::map<std::string, double> variableMap;
+typedef std::map<std::string, std::string> functionMap;
 
 class CIdentifier
 {
@@ -14,8 +14,8 @@ public:
 	CIdentifier() = default;
 	~CIdentifier() = default;
 	std::pair<std::string, double> GetIdentifierValue(std::string identifier, std::string& identifierType);
-	variable GetAllVariable() const;
-	function GetFunctionValues() const;
+	variableMap GetAllVariable() const;
+	functionMap GetFunctionValues() const;
 	int CreateNewVariable(std::string identifier);
 	int ChangeValueOfIdentifier(std::string identifier1, std::string identifier2);
 	int ChangeValueOfIdentifier(std::string identifier, double value);
@@ -30,6 +30,6 @@ private:
 	double MakeOperation(char operation, double value1, double value2);
 	void CalculateFunctionValue(std::string function, double& value);
 
-	variable m_variables;
-	function m_functions;
+	variableMap m_variables;
+	functionMap m_functions;
 };

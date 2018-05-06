@@ -21,13 +21,10 @@
     <ClInclude Include="targetver.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Calculator\Variable.h">
+    <ClInclude Include="..\Calculator\CCalculatorController.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="..\Calculator\Function.h">
-      <Filter>Header Files</Filter>
-    </ClInclude>
-    <ClInclude Include="..\Calculator\CalculatorController.h">
+    <ClInclude Include="..\Calculator\СIdentifier.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
@@ -35,19 +32,16 @@
     <ClCompile Include="stdafx.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="Calculator_tests.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="main.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Calculator\Function.cpp">
+    <ClCompile Include="..\Calculator\СIdentifier.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Calculator\Variable.cpp">
+    <ClCompile Include="..\Calculator\CCalculatorController.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\Calculator\CalculatorController.cpp">
+    <ClCompile Include="CCalculator_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
