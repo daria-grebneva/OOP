@@ -2,11 +2,11 @@
 #include "CShape.h"
 
 CShape::CShape(const std::string& color)
-	: m_color(color)
+	: m_outlineColor(color)
 {
 }
 
 std::string CShape::GetOutlineColor() const
 {
-	return m_color;
+	return m_outlineColor;
 }

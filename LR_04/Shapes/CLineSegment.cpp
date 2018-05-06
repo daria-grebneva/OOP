@@ -12,7 +12,7 @@ CLineSegment::CLineSegment(const CPoint& start, const CPoint& end, const std::st
 
 double CLineSegment::GetArea() const
 {
-	return ZERO;
+	return 0;
 }
 
 double CLineSegment::GetPerimeter() const

@@ -26,7 +26,7 @@ TEST_CASE(" ", "[Remote_Control]")
 			output = stringstream();
 			input = stringstream();
 			REQUIRE(input << command);
-			REQUIRE(remoteControl.HandleCommand());
+			REQUIRE(remoteControl.ProcessCommand());
 			REQUIRE(tv.IsTurnedOn() == expectedChannel.is_initialized());
 			REQUIRE(tv.GetChannel() == expectedChannel.get_value_or(0));
 			REQUIRE(input.eof());

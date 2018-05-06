@@ -15,7 +15,7 @@ CRemoteControl::CRemoteControl(CTVSet& tv, std::istream& input, std::ostream& ou
 {
 }
 
-bool CRemoteControl::HandleCommand()
+bool CRemoteControl::ProcessCommand()
 {
 	std::string commandLine;
 	getline(m_input, commandLine);

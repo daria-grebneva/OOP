@@ -1,11 +1,10 @@
 #pragma once
 
-using namespace std;
-typedef multimap<string, string> Dictionary;
+typedef std::multimap<std::string, std::string> Dictionary;
 
-void ProcessEnteredWord(const string& word, Dictionary& dictionary, bool& isNewWord);
-Dictionary ReadDictionaryFromFile(const string& inputFileName);
-string FindWordInDictionary(const string& word, Dictionary& dictionary);
-bool SaveNewWord(const string& word, Dictionary& dictionary);
+void ProcessEnteredWord(const std::string& word, Dictionary& dictionary, bool& isNewWord);
+Dictionary ReadDictionaryFromFile(const std::string& inputFileName);
+std::string FindWordInDictionary(const std::string& word, Dictionary& dictionary);
+bool SaveNewWord(const std::string& word, Dictionary& dictionary);
 void ReadWordAndProcess(Dictionary& dictionary, bool& isNewWord);
-void UpdateDictionary(const string& inputFileName, Dictionary& dictionary);
+void UpdateDictionary(const std::string& inputFileName, Dictionary& dictionary);

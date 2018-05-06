@@ -20,7 +20,7 @@
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>15.0</VCProjectVersion>
-    <ProjectGuid>{D7F0E3E2-B51B-4377-B136-789F4AE15990}</ProjectGuid>
+    <ProjectGuid>{531FB959-6FCD-4C5A-B7D0-0CCD6D3C3068}</ProjectGuid>
     <Keyword>Win32Proj</Keyword>
     <RootNamespace>Calculator</RootNamespace>
     <WindowsTargetPlatformVersion>10.0.16299.0</WindowsTargetPlatformVersion>
@@ -147,23 +147,21 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClInclude Include="CalculatorController.h" />
-    <ClInclude Include="Function.h" />
+    <ClInclude Include="CCalculatorController.h" />
+    <ClInclude Include="СIdentifier.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
-    <ClInclude Include="Variable.h" />
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="CalculatorController.cpp" />
-    <ClCompile Include="Function.cpp" />
+    <ClCompile Include="CCalculatorController.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="СIdentifier.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
     </ClCompile>
-    <ClCompile Include="Variable.cpp" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

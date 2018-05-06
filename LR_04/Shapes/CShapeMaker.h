@@ -24,9 +24,9 @@ private:
 	void GetMinPerimeterShape(std::istream& args) const;
 	void GetMaxAreaShape(std::istream& args) const;
 	bool IsValidColor(const std::string& color) const;
-	void AddFFToColor(std::string& color) const;
+	void AddFFToColorIfNeeded(std::string& color) const;
 	void ShowUsage(std::istream& args);
-	void CheckEmptyShapesArray() const;
+	void CheckIsEmptyShapesArray() const;
 	void CheckValidColor(const std::string& color);
 
 	std::vector<std::shared_ptr<IShape>> m_savedShapes;

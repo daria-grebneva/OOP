@@ -17,8 +17,9 @@ public:
 	void Draw(ICanvas& canvas) const;
 
 private:
+	double GetDistanceBetweenVertices(const CPoint& vertex1, const CPoint& vertex2) const;
+
 	CPoint m_vertex1;
 	CPoint m_vertex2;
 	CPoint m_vertex3;
-	double GetDistanceBetweenVertices(const CPoint& vertex1, const CPoint& vertex2) const;
 };

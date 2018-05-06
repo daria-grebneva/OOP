@@ -3,7 +3,7 @@
 #include "CUtils.h"
 #include "Config.h"
 
-CRectangle::CRectangle(const CPoint& leftTop, const double width, const double height, const std::string& outlineColor, const std::string& fillColor)
+CRectangle::CRectangle(const CPoint& leftTop, double width, double height, const std::string& outlineColor, const std::string& fillColor)
 	: m_leftTop(leftTop)
 	, m_width(width)
 	, m_height(height)
@@ -18,7 +18,7 @@ double CRectangle::GetArea() const
 
 double CRectangle::GetPerimeter() const
 {
-	return TWO_COEFFICENT * (m_width + m_height);
+	return 2.0 * (m_width + m_height);
 }
 
 CPoint CRectangle::GetLeftTop() const

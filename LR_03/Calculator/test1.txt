@@ -1,6 +1,0 @@
-var x
-var y
-fn XPlusY=x+y
-fn XPlusYDivZ=XPlusY
-printfns
-...

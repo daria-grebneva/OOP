@@ -44,7 +44,7 @@ void CShapeMaker::ExecuteCommand() const
 	}
 	else
 	{
-		throw std::exception("Unknown command");
+		throw std::logic_error("Unknown command");
 	}
 }
 
@@ -60,7 +60,7 @@ bool CShapeMaker::IsValidColor(const std::string& color) const
 	return true;
 }
 
-void CShapeMaker::AddFFToColor(std::string& color) const
+void CShapeMaker::AddFFToColorIfNeeded(std::string& color) const
 {
 	if (color.size() == COLOR_SIZE)
 	{
@@ -68,17 +68,17 @@ void CShapeMaker::AddFFToColor(std::string& color) const
 	}
 }
 
-void CShapeMaker::CheckEmptyShapesArray() const
+void CShapeMaker::CheckIsEmptyShapesArray() const
 {
 	if (m_savedShapes.empty())
 	{
-		throw std::exception("Shapes array is empty");
+		throw std::logic_error("Shapes array is empty");
 	}
 }
 
 void CShapeMaker::DrawShapes(std::istream&)
 {
-	CheckEmptyShapesArray();
+	CheckIsEmptyShapesArray();
 	sf::RenderWindow window(sf::VideoMode(WINDOW_WIDTH, WINDOW_HEIGTH), "Shapes");
 	CCanvas canvas(window);
 
@@ -103,7 +103,7 @@ void CShapeMaker::DrawShapes(std::istream&)
 
 void CShapeMaker::GetMinPerimeterShape(std::istream& args) const
 {
-	CheckEmptyShapesArray();
+	CheckIsEmptyShapesArray();
 
 	auto it = std::min_element(m_savedShapes.begin(), m_savedShapes.end(),
 		[](const std::shared_ptr<IShape>& shape1, const std::shared_ptr<IShape>& shape2) {
@@ -119,7 +119,7 @@ void CShapeMaker::GetMinPerimeterShape(std::istream& args) const
 
 void CShapeMaker::GetMaxAreaShape(std::istream& args) const
 {
-	CheckEmptyShapesArray();
+	CheckIsEmptyShapesArray();
 
 	auto it = std::max_element(m_savedShapes.begin(), m_savedShapes.end(),
 		[](const std::shared_ptr<IShape>& shape1, const std::shared_ptr<IShape>& shape2) {
@@ -134,9 +134,9 @@ void CShapeMaker::GetMaxAreaShape(std::istream& args) const
 
 void CShapeMaker::CheckValidColor(const std::string& color)
 {
-	if (!IsValidColor(color))
+	if ((color.size() != HEX_SIZE) || !IsValidColor(color))
 	{
-		throw std::exception("Invalid color form \nValid hex form '#ff0000'");
+		throw std::invalid_argument("Invalid color form \nValid hex form '#ff0000'");
 	}
 }
 
@@ -154,17 +154,17 @@ void CShapeMaker::CreateCircle(std::istream& args)
 
 		if (radius < 0)
 		{
-			throw std::exception("Radius less than 0");
+			throw std::invalid_argument("Radius less than 0");
 		}
 
-		AddFFToColor(outlineColor);
-		AddFFToColor(fillColor);
-		std::shared_ptr<IShape> circlePtr(new CCircle(center, radius, outlineColor, fillColor));
+		AddFFToColorIfNeeded(outlineColor);
+		AddFFToColorIfNeeded(fillColor);
+		auto circlePtr = std::make_shared<CCircle>(center, radius, outlineColor, fillColor);
 		m_savedShapes.push_back(std::move(circlePtr));
 	}
 	else
 	{
-		throw std::exception("Incorrect argument for cicle creating");
+		throw std::invalid_argument("Incorrect argument for cicle creating");
 	}
 }
 
@@ -177,14 +177,14 @@ void CShapeMaker::CreateLine(std::istream& args)
 	if (args >> start.x >> start.y >> end.x >> end.y >> outlineColor)
 	{
 		CheckValidColor(outlineColor);
-		AddFFToColor(outlineColor);
+		AddFFToColorIfNeeded(outlineColor);
 
-		std::shared_ptr<IShape> linePtr(new CLineSegment(start, end, outlineColor));
+		auto linePtr = std::make_shared<CLineSegment>(start, end, outlineColor);
 		m_savedShapes.push_back(std::move(linePtr));
 	}
 	else
 	{
-		throw std::exception("Incorrect argument for line creating");
+		throw std::invalid_argument("Incorrect argument for line creating");
 	}
 }
 
@@ -201,25 +201,25 @@ void CShapeMaker::CreateRectangle(std::istream& args)
 		CheckValidColor(outlineColor);
 		CheckValidColor(fillColor);
 
-		AddFFToColor(outlineColor);
-		AddFFToColor(fillColor);
+		AddFFToColorIfNeeded(outlineColor);
+		AddFFToColorIfNeeded(fillColor);
 
 		if (width < 0)
 		{
-			throw std::exception("Width less than 0");
+			throw std::invalid_argument("Width less than 0");
 		}
 
 		if (height < 0)
 		{
-			throw std::exception("Height less than 0");
+			throw std::invalid_argument("Height less than 0");
 		}
 
-		std::shared_ptr<IShape> rectanglePtr(new CRectangle(leftTop, width, height, outlineColor, fillColor));
+		auto rectanglePtr = std::make_shared<CRectangle>(leftTop, width, height, outlineColor, fillColor);
 		m_savedShapes.push_back(std::move(rectanglePtr));
 	}
 	else
 	{
-		throw std::exception("Incorrect argument for rectangle creating");
+		throw std::invalid_argument("Incorrect argument for rectangle creating");
 	}
 }
 
@@ -236,14 +236,14 @@ void CShapeMaker::CreateTriangle(std::istream& args)
 		CheckValidColor(outlineColor);
 		CheckValidColor(fillColor);
 
-		AddFFToColor(outlineColor);
-		AddFFToColor(fillColor);
+		AddFFToColorIfNeeded(outlineColor);
+		AddFFToColorIfNeeded(fillColor);
 
-		std::shared_ptr<IShape> trianglePtr(new CTriangle(vertex1, vertex2, vertex3, outlineColor, fillColor));
+		auto trianglePtr = std::make_shared<CTriangle>(vertex1, vertex2, vertex3, outlineColor, fillColor);
 		m_savedShapes.push_back(std::move(trianglePtr));
 	}
 	else
 	{
-		throw std::exception("Incorrect argument for triangle creating");
+		throw std::invalid_argument("Incorrect argument for triangle creating");
 	}
 }

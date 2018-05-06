@@ -3,7 +3,7 @@
 #include "CUtils.h"
 #include "Config.h"
 
-CCircle::CCircle(const CPoint& center, const double radius, const std::string& outlineColor, const std::string& fillColor)
+CCircle::CCircle(const CPoint& center, double radius, const std::string& outlineColor, const std::string& fillColor)
 	: m_center(center)
 	, m_radius(radius)
 	, CSolidShape(outlineColor, fillColor)

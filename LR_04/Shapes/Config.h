@@ -17,6 +17,4 @@ const int COLOR_SIZE = 6;
 const int WINDOW_WIDTH = 1500;
 const int WINDOW_HEIGTH = 850;
 constexpr uint8_t QUADRATIC_DEGREE = 2;
-constexpr double TWO_COEFFICENT = 2.0;
-constexpr double HALF_COEFFICIENT = 0.5;
-constexpr double ZERO = 0;
+const int HEX_SIZE = 6;

@@ -12,7 +12,7 @@ class CRemoteControl : boost::noncopyable
 {
 public:
 	CRemoteControl(CTVSet& tv, std::istream& input, std::ostream& output);
-	bool HandleCommand();
+	bool ProcessCommand();
 
 private:
 	bool TurnOn(std::istream& args);

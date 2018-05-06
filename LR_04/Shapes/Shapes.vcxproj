@@ -211,7 +211,6 @@
     <ClCompile Include="CTriangle.cpp" />
     <ClCompile Include="CUtils.cpp" />
     <ClCompile Include="ICanvasDrawable.cpp" />
-    <ClCompile Include="IShape.cpp" />
     <ClCompile Include="ISolidShape.cpp" />
     <ClCompile Include="main.cpp" />
     <ClCompile Include="stdafx.cpp">

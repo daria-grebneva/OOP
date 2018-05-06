@@ -12,7 +12,7 @@ int main()
 	while (!cin.eof() && !cin.fail())
 	{
 		cout << "> ";
-		if (!remoteControl.HandleCommand())
+		if (!remoteControl.ProcessCommand())
 		{
 			cout << "Unknown command!" << endl;
 		}
