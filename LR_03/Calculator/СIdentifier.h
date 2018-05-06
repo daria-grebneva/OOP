@@ -2,6 +2,9 @@
 #include "stdafx.h"
 
 const std::string NOT_FOUND = "Not found";
+const std::string VAR = "variable";
+const std::string FUNCTION = "function";
+
 typedef std::map<std::string, double> variable;
 typedef std::map<std::string, std::string> function;
 

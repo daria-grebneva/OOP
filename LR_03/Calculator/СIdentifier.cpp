@@ -15,7 +15,7 @@ function CIdentifier::GetFunctionValues() const
 
 int CIdentifier::CreateNewVariable(string identifier)
 {
-	string identifierType = "none";
+	string identifierType = NONE;
 	if (IsIdentifier(identifier))
 	{
 		if (GetIdentifierValue(identifier, identifierType).first == NOT_FOUND)
@@ -39,14 +39,14 @@ pair<string, double> CIdentifier::GetIdentifierValue(string identifier, string& 
 	{
 		identifierValue = *m_variables.find(identifier);
 		identifierValue = make_pair("", identifierValue.second);
-		identifierType = "variable";
+		identifierType = VAR;
 	}
 	else if (m_functions.find(identifier) != m_functions.end())
 	{
 		double value;
 		CalculateFunctionValue(identifier, value);
 		identifierValue = make_pair(identifier, value);
-		identifierType = "function";
+		identifierType = FUNCTION;
 	}
 
 	return identifierValue;
@@ -54,7 +54,7 @@ pair<string, double> CIdentifier::GetIdentifierValue(string identifier, string& 
 
 int CIdentifier::ChangeValueOfIdentifier(string identifier1, string identifier2)
 {
-	string identifierType1 = "none";
+	string identifierType1 = NONE;
 	if (GetIdentifierValue(identifier1, identifierType1).first != NOT_FOUND)
 	{
 		m_variables.erase(identifier1);
@@ -62,10 +62,10 @@ int CIdentifier::ChangeValueOfIdentifier(string identifier1, string identifier2)
 
 	if (IsIdentifier(identifier1))
 	{
-		string identifierType2 = "none";
+		string identifierType2 = NONE;
 		if (GetIdentifierValue(identifier2, identifierType2).first != NOT_FOUND)
 		{
-			if (identifierType1 == "variable" || "none")
+			if (identifierType1 == VAR || identifierType1 == NONE)
 			{
 				m_variables.emplace(identifier1, GetIdentifierValue(identifier2, identifierType2).second);
 			}
@@ -86,7 +86,7 @@ int CIdentifier::ChangeValueOfIdentifier(string identifier1, string identifier2)
 
 int CIdentifier::ChangeValueOfIdentifier(string identifier, double value)
 {
-	string identifierType = "none";
+	string identifierType = NONE;
 	if (GetIdentifierValue(identifier, identifierType).first != NOT_FOUND)
 	{
 		m_variables.erase(identifier);
@@ -106,7 +106,7 @@ int CIdentifier::CreateNewFunction(string identifier1, string identifier2)
 {
 	if (IsIdentifier(identifier1))
 	{
-		string identifierType = "none";
+		string identifierType = NONE;
 		if (GetIdentifierValue(identifier2, identifierType).first != NOT_FOUND)
 		{
 			m_functions.insert(pair<string, string>(identifier1, identifier2));
@@ -163,7 +163,7 @@ bool CIdentifier::IsIdentifier(string identifier) const
 
 bool CIdentifier::IsFunctionExists(string function)
 {
-	string identifierType = "none";
+	string identifierType = NONE;
 
 	return (GetIdentifierValue(function, identifierType).first != NOT_FOUND);
 }
