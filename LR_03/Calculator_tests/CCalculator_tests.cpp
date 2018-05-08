@@ -149,12 +149,4 @@ TEST_CASE(" ", "[Calculator]")
 		command = "printfns";
 		fixture.VerifyCommandHandling(command, "fib0 1.00\nfib1 1.00\nfib2 2.00\nfib3 3.00\nfib4 5.00\nfib5 8.00\nfib6 13.00\n");
 	}
-
-	/*SECTION("")
-	{
-		string command = "";
-		fixture.VerifyCommandHandling(command, ""); 
-		command = "";
-		fixture.VerifyCommandHandling(command, "");
-	}*/
 }
