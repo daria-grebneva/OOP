@@ -1,8 +1,6 @@
 #pragma once
-
-using namespace std;
-
-enum class Protocol
+#include <map>
+enum Protocol
 {
 	HTTP,
 	HTTPS,
@@ -13,6 +11,6 @@ enum class Protocol
 const int PORT_MIN_BOUND = 1;
 const int PORT_MAX_BOUND = 65535;
 
-bool ParseURL(string const& url, Protocol& protocol, int& port, string& host, string& document);
+bool ParseURL(std::string const& url, Protocol& protocol, int& port, std::string& host, std::string& document);
 void ParseURLs();
-void PrintURLInfo(const string& url, int port, const string& host, const string& document);
+void PrintURLInfo(const std::string& url, int port, const std::string& host, const std::string& document);
