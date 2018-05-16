@@ -9,6 +9,7 @@ public:
 	int GetNumerator() const;
 	int GetDenominator() const;
 	double ToDouble() const;
+	std::pair<int, CRational> ToCompoundFraction() const;
 
 	const CRational operator-() const;
 	const CRational operator+() const;

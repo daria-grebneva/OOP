@@ -420,4 +420,21 @@ TEST_CASE(" ", "[CRational]")
 			REQUIRE(1 >= number);
 		}
 	}
+	SECTION("Convert to compound fraction")
+	{
+		CRational rational(24, 3);
+		std::pair<int, CRational> positiveRational = rational.ToCompoundFraction();
+		REQUIRE(positiveRational.first == 8);
+		REQUIRE(positiveRational.second == CRational(0, 1));
+
+		rational = CRational(-16, 5);
+		std::pair<int, CRational> negativeRational = rational.ToCompoundFraction();
+		REQUIRE(negativeRational.first == -3);
+		REQUIRE(negativeRational.second == CRational(-1, 5));
+
+		rational = CRational(0, 10);
+		std::pair<int, CRational> zero = rational.ToCompoundFraction();
+		REQUIRE(zero.first == 0);
+		REQUIRE(zero.second == CRational(0, 1));
+	}
 }

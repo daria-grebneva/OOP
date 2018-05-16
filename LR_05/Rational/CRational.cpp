@@ -164,3 +164,11 @@ std::istream& operator>>(std::istream& input, CRational& rational)
 
 	return input;
 }
+
+std::pair<int, CRational> CRational::ToCompoundFraction() const
+{
+	auto integer = static_cast<int>(ToDouble());
+	auto numerator = m_numerator - m_denominator * integer;
+
+	return std::make_pair<int, CRational>(std::move(integer), CRational(numerator, m_denominator));
+}
