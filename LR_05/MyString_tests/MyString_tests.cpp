@@ -14,7 +14,7 @@ int StringSize(const char* str)
 	return sizeStr;
 }
 
-void CompareStringsContents(const CMyString& str1, const char* str2, size_t strSize)
+void CompareStringContents(const CMyString& str1, const char* str2, size_t strSize)
 {
 	auto myStr = str1.GetStringData();
 	for (int i = 0; i < strSize; ++i)
@@ -35,46 +35,88 @@ void CompareNotIdenticalStrings(const CMyString& str1, const char* str2, size_t 
 	}
 }
 
+void DefaultConstructor(size_t length, const char* inputStr)
+{
+	CMyString str;
+	REQUIRE(str.GetLength() == length);
+	CompareStringContents(str, inputStr, length);
+}
+
+void SymbolsArrayConstructor(size_t length, const char* inputStr)
+{
+	CMyString str(inputStr);
+	REQUIRE(str.GetLength() == length);
+	CompareStringContents(str, inputStr, length);
+}
+
+void SymbolsArrayAndLengthConstructor(size_t length, const char* inputStr)
+{
+	CMyString str(inputStr, length);
+	REQUIRE(str.GetLength() == length);
+	CompareStringContents(str, inputStr, length);
+}
+
+void StlConstructor(const char* inputStr)
+{
+	string str = inputStr;
+	CMyString str1(str);
+	REQUIRE(str1.GetLength() == str.size());
+}
+
+void CopyConstructor(const char* inputStr)
+{
+	CMyString str1(inputStr);
+	CMyString str2(str1);
+	REQUIRE(str1.GetLength() == str2.GetLength());
+	CompareStringContents(str2, str1.GetStringData(), str1.GetLength());
+}
+
+void MoveConstructor(size_t length, const char* inputStr)
+{
+	CMyString str(inputStr);
+	CMyString str1(std::move(str));
+	CompareStringContents(str1, inputStr, length);
+	CompareStringContents(str, "", 0);
+}
+
 TEST_CASE(" ", "[My String]")
 {
 
 	SECTION("Create a normal string")
 	{
-		SECTION("String without parameters")
+		SECTION("By default constructor")
 		{
-			CMyString str;
-			REQUIRE(str.GetLength() == 0);
-			CompareStringsContents(str, "", 0);
+			DefaultConstructor(0, "");
 		}
-		SECTION("String with empty string")
+		SECTION("By symbols array and by string and length constructors")
 		{
-			CMyString str1("");
-			REQUIRE(str1.GetLength() == 0);
-			CompareStringsContents(str1, "", 0);
-			CMyString str2("", 0);
-			REQUIRE(str2.GetLength() == 0);
-			CompareStringsContents(str2, "", 0);
+			SymbolsArrayConstructor(0, "");
+			SymbolsArrayAndLengthConstructor(0, "");
 		}
 
-		SECTION("With usual data")
+		SECTION("By string")
 		{
-			CMyString str1("Normal string!");
-			REQUIRE(str1.GetLength() == 14);
-			CompareStringsContents(str1, "Normal string!", 14);
+			SymbolsArrayConstructor(14, "Normal string!");
 		}
-		SECTION("With stl library")
+		SECTION("By stl")
 		{
-			string str2 = "Normal string!";
-			CMyString str3(str2);
-			REQUIRE(str3.GetLength() == str2.size());
+			StlConstructor("Normal string!");
 		}
 		SECTION("By copy")
 		{
-			CMyString str1("Normal string!");
-			CMyString str2(str1);
-			REQUIRE(str1.GetLength() == str2.GetLength());
-			CompareStringsContents(str2, str1.GetStringData(), str1.GetLength());
+			CopyConstructor("Normal string!");
 		}
+		SECTION("By move")
+		{
+			MoveConstructor(14, "Normal string!");
+		}
+	}
+	SECTION("Check zero symbol by the constructor without length and with")
+	{
+		CMyString str("Hell\0o");
+		CompareStringContents(str, "Hell", 3);
+		CMyString str1("Hell\0o", 4);
+		CompareStringContents(str1, "Hell\0o", 4);
 	}
 	SECTION("Get length of string")
 	{
@@ -104,9 +146,9 @@ TEST_CASE(" ", "[My String]")
 	SECTION("Clear string")
 	{
 		CMyString str("My string!");
-		CompareStringsContents(str, "My string!", 10);
+		CompareStringContents(str, "My string!", 10);
 		str.Clear();
-		CompareStringsContents(str, "", 0);
+		CompareStringContents(str, "", 0);
 	}
 
 	SECTION("Check operators")
@@ -115,10 +157,10 @@ TEST_CASE(" ", "[My String]")
 		{
 			CMyString str("My string!");
 			str = str;
-			CompareStringsContents(str, "My string!", 10);
+			CompareStringContents(str, "My string!", 10);
 			CMyString str2("Other string");
 			str = str2;
-			CompareStringsContents(str, "Other string", 12);
+			CompareStringContents(str, "Other string", 12);
 		}
 
 		SECTION("+")
@@ -127,29 +169,29 @@ TEST_CASE(" ", "[My String]")
 			CMyString str2(" OOP");
 			CMyString str3("!");
 			CMyString str = str1 + str2 + str3;
-			CompareStringsContents(str, "I love OOP!", 11);
+			CompareStringContents(str, "I love OOP!", 11);
 			string str4 = " programming!";
 			CMyString str5 = str1 + str4;
-			CompareStringsContents(str5, "I love programming!", 19);
+			CompareStringContents(str5, "I love programming!", 19);
 		}
 		SECTION("+=")
 		{
 			CMyString str1("I love");
 			CMyString str2(" OOP");
 			str1 += str2;
-			CompareStringsContents(str1, "I love OOP", 10);
+			CompareStringContents(str1, "I love OOP", 10);
 			string str4 = " and programming!";
 			str1 += str4;
-			CompareStringsContents(str1, "I love OOP and programming!", 27);
+			CompareStringContents(str1, "I love OOP and programming!", 27);
 		}
 		SECTION("==")
 		{
 			CMyString str1("My string");
 			CMyString str2("My string");
-			CompareStringsContents(str1, str2.GetStringData(), 9);
+			CompareStringContents(str1, str2.GetStringData(), 9);
 			str1 = "";
 			str2 = "";
-			CompareStringsContents(str1, str2.GetStringData(), 0);
+			CompareStringContents(str1, str2.GetStringData(), 0);
 		}
 		SECTION("!=")
 		{
@@ -205,7 +247,7 @@ TEST_CASE(" ", "[My String]")
 			std::stringstream strm("string");
 			CMyString str;
 			strm >> str;
-			CompareStringsContents(str, "string", 6);
+			CompareStringContents(str, "string", 6);
 		}
 		SECTION("<<")
 		{
