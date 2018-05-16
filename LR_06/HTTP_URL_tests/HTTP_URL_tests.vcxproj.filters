@@ -38,9 +38,6 @@
     <ClCompile Include="..\HTTP_URL\CHttpUrl.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
-    <ClCompile Include="..\HTTP_URL\CUrlParsingError.cpp">
-      <Filter>Source Files</Filter>
-    </ClCompile>
     <ClCompile Include="HttpUrl_tests.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>

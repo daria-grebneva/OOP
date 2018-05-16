@@ -166,7 +166,6 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\HTTP_URL\CHttpUrl.cpp" />
-    <ClCompile Include="..\HTTP_URL\CUrlParsingError.cpp" />
     <ClCompile Include="HttpUrl_tests.cpp" />
     <ClCompile Include="main.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">NotUsing</PrecompiledHeader>

@@ -2,9 +2,6 @@
 #include "stdafx.h"
 #include "CUrlParsingError.h"
 
-const int PORT_MIN_BOUND = 1;
-const int PORT_MAX_BOUND = 65535;
-
 enum Protocol
 {
 	HTTP = 80,
@@ -34,7 +31,6 @@ public:
 	std::string GetDocument() const;
 	Protocol GetProtocol() const;
 	unsigned short GetPort() const;
-	std::string GetProtocolTitle() const;
 
 private:
 	Protocol ParseProtocol(std::string const& protocol);
@@ -42,12 +38,10 @@ private:
 	unsigned short ParsePort(std::string const& url);
 	std::string ParseDocument(std::string const& url);
 	bool CheckPortInRange(unsigned short port);
-	void FillProtocolMap();
 
 	std::string m_url;
 	std::string m_domain;
 	std::string m_document;
 	Protocol m_protocol;
 	unsigned short m_port;
-	std::map<std::string, Protocol> m_protocolMap;
 };

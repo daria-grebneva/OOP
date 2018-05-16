@@ -4,13 +4,24 @@
 
 using namespace std;
 
+namespace
+{
+std::map<std::string, Protocol> m_protocolMap = {
+	{ "http", Protocol::HTTP },
+	{ "https", Protocol::HTTPS }
+};
+}
+
+constexpr int PORT_MIN_BOUND = 1;
+constexpr int PORT_MAX_BOUND = 65535;
+
 CHttpUrl::CHttpUrl(const string& url)
 	: m_url(url)
 {
 
 	if (url.empty())
 	{
-		throw CUrlParsingError("Url is empty\n");
+		throw CUrlParsingError("Url is empty");
 	}
 	smatch result;
 	regex reg(R"(^(\w+):\/\/([^\s:\/]+)(?::(\d+))?(?:\/(\S*))?$)", regex::icase);
@@ -18,10 +29,8 @@ CHttpUrl::CHttpUrl(const string& url)
 
 	if (!mapped)
 	{
-		throw CUrlParsingError("Invalid url\n");
+		throw CUrlParsingError("Invalid url");
 	}
-
-	FillProtocolMap();
 
 	m_protocol = ParseProtocol(result[1]);
 	m_domain = ParseDomain(result[2]);
@@ -36,11 +45,10 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 {
 	if (domain.empty())
 	{
-		throw CUrlParsingError("Empty domain\n");
+		throw CUrlParsingError("Empty domain");
 	}
 
 	m_document = ParseDocument(document);
-	FillProtocolMap();
 	string protocolStr;
 	if (m_protocol == Protocol::HTTP)
 	{
@@ -64,13 +72,12 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 {
 	if (domain.empty())
 	{
-		throw CUrlParsingError("Empty domain\n");
+		throw CUrlParsingError("Empty domain");
 	}
 
 	m_document = ParseDocument(document);
-	FillProtocolMap();
 
-	string portStr = "";
+	string portStr;
 	string protocolStr;
 	if (m_protocol == Protocol::HTTP)
 	{
@@ -94,10 +101,10 @@ CHttpUrl::CHttpUrl(string const& domain, string const& document, Protocol protoc
 
 unsigned short CHttpUrl::ParsePort(const string& portString)
 {
-	unsigned short port = static_cast<unsigned short>(m_protocol);
+	auto port = static_cast<unsigned short>(m_protocol);
 	if (portString.empty())
 	{
-		return static_cast<unsigned short>(m_protocol);
+		return port;
 	}
 	port = stoi(portString);
 	if (CheckPortInRange(port))
@@ -106,7 +113,7 @@ unsigned short CHttpUrl::ParsePort(const string& portString)
 	}
 	else
 	{
-		throw CUrlParsingError("Port out of range\n");
+		throw CUrlParsingError("Port out of range");
 	}
 }
 
@@ -124,31 +131,25 @@ bool CHttpUrl::CheckPortInRange(unsigned short port)
 	return !(port < PORT_MIN_BOUND || port > PORT_MAX_BOUND);
 }
 
-void CHttpUrl::FillProtocolMap()
-{
-	m_protocolMap.emplace("http", Protocol::HTTP);
-	m_protocolMap.emplace("https", Protocol::HTTPS);
-}
-
 Protocol CHttpUrl::ParseProtocol(const string& protocolStr)
 {
-	string protocolToLowCase;
-	transform(protocolStr.begin(), protocolStr.end(), back_inserter(protocolToLowCase), tolower);
+	string lowCaseProtocol;
+	transform(protocolStr.begin(), protocolStr.end(), back_inserter(lowCaseProtocol), tolower);
 
-	auto it = m_protocolMap.find(protocolToLowCase);
+	auto it = m_protocolMap.find(lowCaseProtocol);
 	if (it != m_protocolMap.end())
 	{
 		return it->second;
 	}
 
-	throw CUrlParsingError("Invalid protocol\n");
+	throw CUrlParsingError("Invalid protocol");
 }
 
 string CHttpUrl::ParseDomain(string const& domain)
 {
 	if (domain == "")
 	{
-		throw CUrlParsingError("Invalid domain\n");
+		throw CUrlParsingError("Invalid domain");
 	}
 	return domain;
 }
@@ -166,16 +167,6 @@ string CHttpUrl::GetDomain() const
 string CHttpUrl::GetDocument() const
 {
 	return m_document;
-}
-
-string CHttpUrl::GetProtocolTitle() const
-{
-	for (auto& it : m_protocolMap)
-	{
-		if (it.second == m_protocol)
-			return it.first;
-	}
-	throw CUrlParsingError("Invalid protocol\n");
 }
 
 Protocol CHttpUrl::GetProtocol() const

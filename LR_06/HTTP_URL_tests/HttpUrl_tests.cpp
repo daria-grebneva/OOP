@@ -3,6 +3,43 @@
 #include "../HTTP_URL/CUrlParsingError.h"
 
 using namespace std;
+
+void CheckUrlParameters(const CHttpUrl& url, Protocol protocol, unsigned short port, string const& document, string const& domain)
+{
+	REQUIRE(url.GetProtocol() == protocol);
+	REQUIRE(url.GetPort() == port);
+	REQUIRE(url.GetDocument() == document);
+	REQUIRE(url.GetDomain() == domain);
+}
+
+void ConstructUrlFromString(string const& inputUrl, Protocol protocol, unsigned short port, string const& document, string const& domain)
+{
+	CHttpUrl url(inputUrl);
+	CheckUrlParameters(url, protocol, port, document, domain);
+	REQUIRE(url.GetURL() == inputUrl);
+}
+
+void ConstructUrlWithTwoParameters(Protocol protocol, unsigned short port, string const& document, string const& domain)
+{
+	CHttpUrl url(domain, document);
+	CheckUrlParameters(url, protocol, port, document, domain);
+}
+
+void ConstructUrlWithThreeParameters(Protocol protocol, unsigned short port, string const& document, string const& domain)
+{
+	CHttpUrl url(domain, document, protocol);
+	CheckUrlParameters(url, protocol, port, document, domain);
+}
+
+void ConstructUrlWithFourParameters(Protocol protocol, unsigned short port, string const& document, string const& domain)
+{
+	CHttpUrl url(domain, document, protocol, port);
+	REQUIRE(url.GetProtocol() == protocol);
+	REQUIRE(url.GetDomain() == domain);
+	REQUIRE(url.GetPort() == port);
+	REQUIRE(url.GetDocument() == document);
+}
+
 TEST_CASE(" ", "[HTTP Url]")
 {
 	SECTION("Exceptions")
@@ -50,50 +87,29 @@ TEST_CASE(" ", "[HTTP Url]")
 	{
 		SECTION("Http protocol")
 		{
-			CHttpUrl url("http://mysite.com:800/some_document");
-			REQUIRE(url.GetProtocol() == Protocol::HTTP);
-			REQUIRE(url.GetProtocolTitle() == "http");
-			REQUIRE(url.GetPort() == 800);
-			REQUIRE(url.GetDocument() == "/some_document");
-			REQUIRE(url.GetDomain() == "mysite.com");
-			REQUIRE(url.GetURL() == "http://mysite.com:800/some_document");
+			ConstructUrlFromString("http://mysite.com:800/some_document", Protocol::HTTP, 800, "/some_document", "mysite.com");
 		}
 		SECTION("Https protocol")
 		{
-			CHttpUrl url("https://mysite.com:800/some_document");
-			REQUIRE(url.GetProtocol() == Protocol::HTTPS);
+			ConstructUrlFromString("https://mysite.com:800/some_document", Protocol::HTTPS, 800, "/some_document", "mysite.com");
 		}
 		SECTION("Ports")
 		{
 			SECTION("Port 80 for http protocol")
 			{
-				CHttpUrl url("http://mysite.com/some_document");
-				REQUIRE(url.GetProtocol() == Protocol::HTTP);
+				ConstructUrlFromString("http://mysite.com/some_document", Protocol::HTTP, 80, "/some_document", "mysite.com");
 			}
 			SECTION("Port 443 for https protocol")
 			{
-				CHttpUrl url("https://mysite.com:800/some_document");
-				REQUIRE(url.GetProtocol() == Protocol::HTTPS);
+				ConstructUrlFromString("https://mysite.com/some_document", Protocol::HTTPS, 443, "/some_document", "mysite.com");
 			}
 		}
 		SECTION("Url string")
 		{
-			SECTION("Get url string")
-			{
-				CHttpUrl url("http://mysite.com:800/some_document");
-				REQUIRE(url.GetURL() == "http://mysite.com:800/some_document");
-			}
 			SECTION("Get url string without port")
 			{
-				CHttpUrl url("https://mysite.com/some_document");
-				REQUIRE(url.GetProtocol() == Protocol::HTTPS);
-				REQUIRE(url.GetPort() == 443);
-				REQUIRE(url.GetURL() == "https://mysite.com/some_document");
-
-				CHttpUrl newUrl("http://mysite.com/some_document");
-				REQUIRE(newUrl.GetProtocol() == Protocol::HTTP);
-				REQUIRE(newUrl.GetPort() == 80);
-				REQUIRE(newUrl.GetURL() == "http://mysite.com/some_document");
+				ConstructUrlFromString("https://mysite.com/some_document", Protocol::HTTPS, 443, "/some_document", "mysite.com");
+				ConstructUrlFromString("http://mysite.com/some_document", Protocol::HTTP, 80, "/some_document", "mysite.com");
 			}
 		}
 	}
@@ -101,39 +117,17 @@ TEST_CASE(" ", "[HTTP Url]")
 	{
 		SECTION("Domain and document")
 		{
-			CHttpUrl url("mysite.com", "some_document");
-			REQUIRE(url.GetProtocol() == Protocol::HTTP);
-			REQUIRE(url.GetDomain() == "mysite.com");
-			REQUIRE(url.GetPort() == 80);
-			REQUIRE(url.GetDocument() == "/some_document");
+			ConstructUrlWithTwoParameters(Protocol::HTTP, 80, "/some_document", "mysite.com");
 		}
 		SECTION("Domain and document and protocol")
 		{
-			CHttpUrl url("mysite.com", "some_document", Protocol::HTTP);
-			REQUIRE(url.GetProtocol() == Protocol::HTTP);
-			REQUIRE(url.GetDomain() == "mysite.com");
-			REQUIRE(url.GetPort() == 80);
-			REQUIRE(url.GetDocument() == "/some_document");
-
-			CHttpUrl newUrl("mysite.com", "some_document", Protocol::HTTPS);
-			REQUIRE(newUrl.GetProtocol() == Protocol::HTTPS);
-			REQUIRE(newUrl.GetDomain() == "mysite.com");
-			REQUIRE(newUrl.GetPort() == 443);
-			REQUIRE(newUrl.GetDocument() == "/some_document");
+			ConstructUrlWithThreeParameters(Protocol::HTTP, 80, "/some_document", "mysite.com");
+			ConstructUrlWithThreeParameters(Protocol::HTTPS, 443, "/some_document", "mysite.com");
 		}
 		SECTION("Domain and document and protocol and port")
 		{
-			CHttpUrl url("mysite.com", "some_document", Protocol::HTTP, 880);
-			REQUIRE(url.GetProtocol() == Protocol::HTTP);
-			REQUIRE(url.GetDomain() == "mysite.com");
-			REQUIRE(url.GetPort() == 880);
-			REQUIRE(url.GetDocument() == "/some_document");
-
-			CHttpUrl newUrl("mysite.com", "some_document", Protocol::HTTPS, 880);
-			REQUIRE(newUrl.GetProtocol() == Protocol::HTTPS);
-			REQUIRE(newUrl.GetDomain() == "mysite.com");
-			REQUIRE(newUrl.GetPort() == 880);
-			REQUIRE(newUrl.GetDocument() == "/some_document");
+			ConstructUrlWithFourParameters(Protocol::HTTP, 880, "/some_document", "mysite.com");
+			ConstructUrlWithFourParameters(Protocol::HTTPS, 880, "/some_document", "mysite.com");
 		}
 	}
 }
