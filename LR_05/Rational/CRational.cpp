@@ -170,5 +170,5 @@ std::pair<int, CRational> CRational::ToCompoundFraction() const
 	auto integer = static_cast<int>(ToDouble());
 	auto numerator = m_numerator - m_denominator * integer;
 
-	return std::make_pair<int, CRational>(std::move(integer), CRational(numerator, m_denominator));
+	return std::make_pair(integer, CRational(numerator, m_denominator));
 }

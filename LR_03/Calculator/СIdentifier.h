@@ -8,6 +8,15 @@ const std::string FUNCTION = "function";
 typedef std::map<std::string, double> variableMap;
 typedef std::map<std::string, std::string> functionMap;
 
+//TODO:: изменить тип данных у идентификаторов, возможно указатели на объекты
+//struct FunctionValue
+//{
+//	string identifier1 = "";
+//	string identifier2 = "";
+//	char operation = ' ';
+//	double value = NAN;
+//};
+
 class CIdentifier
 {
 public:

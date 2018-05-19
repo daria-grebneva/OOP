@@ -9,7 +9,6 @@ enum Protocol
 };
 
 class CHttpUrl
-
 {
 
 public:

@@ -75,10 +75,6 @@ CMyString CMyString::SubString(size_t start, size_t length) const
 	{
 		throw out_of_range("Out of range");
 	}
-	else if (length > m_length)
-	{
-		length = m_length;
-	}
 	return CMyString(&m_pChars[start], length);
 }
 

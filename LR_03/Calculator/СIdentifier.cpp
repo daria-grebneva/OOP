@@ -231,6 +231,7 @@ char CIdentifier::InitializeOperation(std::string inputStr)
 	return operation;
 }
 
+//TODO: оставить рекурсию. но вычислять значение только один раз (проверка на не нулл у значения )
 void CIdentifier::CalculateFunctionValue(string function, double& value)
 {
 	string identifier1;

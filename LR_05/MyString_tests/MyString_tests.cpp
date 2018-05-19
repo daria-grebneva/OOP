@@ -165,14 +165,35 @@ TEST_CASE(" ", "[My String]")
 
 		SECTION("+")
 		{
-			CMyString str1("I love");
-			CMyString str2(" OOP");
-			CMyString str3("!");
-			CMyString str = str1 + str2 + str3;
-			CompareStringContents(str, "I love OOP!", 11);
-			string str4 = " programming!";
-			CMyString str5 = str1 + str4;
-			CompareStringContents(str5, "I love programming!", 19);
+			SECTION("three instances of class CMyString")
+			{
+				CMyString str1("I love");
+				CMyString str2(" OOP");
+				CMyString str3("!");
+				CMyString str = str1 + str2 + str3;
+				CompareStringContents(str, "I love OOP!", 11);
+				string str4 = " programming!";
+				CMyString str5 = str1 + str4;
+				CompareStringContents(str5, "I love programming!", 19);
+			}
+			SECTION("instance of class CMyString and class std::string")
+			{
+				CMyString string1("I love ");
+				std::string string2("programming ");
+				CMyString str1 = string1 + string2;
+				CMyString str2 = string2 + string1;
+				CompareStringContents(str1, "I love programming ", 13);
+				CompareStringContents(str2, "programming I love ", 13);
+			}
+			SECTION("instance of class CMyString and const char*")
+			{
+				const char* string2 = "programming ";
+				CMyString string1("I love ");
+				CMyString str1 = string1 + string2;
+				CMyString str2 = string2 + string1;
+				CompareStringContents(str1, "I love programming ", 13);
+				CompareStringContents(str2, "programming I love ", 13);
+			}
 		}
 		SECTION("+=")
 		{
@@ -202,12 +223,27 @@ TEST_CASE(" ", "[My String]")
 		}
 		SECTION("[]")
 		{
-			CMyString str("string");
-			str[0] = 'a';
-			REQUIRE(str[0] == 'a');
-			str[4] = 'k';
-			REQUIRE(str[4] == 'k');
-			CompareNotIdenticalStrings(str, "atrkng", 6);
+			SECTION("read character in string by index")
+			{
+				CMyString str("string");
+				const auto ch1 = str[0];
+				REQUIRE(ch1 == 's');
+				const auto ch2 = str[3];
+				REQUIRE(ch2 == 'i');
+				const auto ch3 = str[1];
+				REQUIRE(ch3 == 't');
+			}
+			SECTION("write character in string by index")
+			{
+				CMyString str("string");
+				auto ch = 't';
+				str[0] = ch;
+				REQUIRE(str[0] == 't');
+				str[2] = ch;
+				REQUIRE(str[2] == 't');
+				str[5] = 's';
+				REQUIRE(str[5] == 's');
+			}
 		}
 		SECTION("<")
 		{
@@ -274,6 +310,8 @@ TEST_CASE(" ", "[My String]")
 			CMyString str("string");
 			REQUIRE_THROWS_AS(str[-1] = 'a', std::out_of_range);
 			REQUIRE_THROWS_AS(str[100] = 'a', std::out_of_range);
+			auto ch = 'g';
+			REQUIRE_THROWS_AS(str[6] = ch, std::out_of_range);
 		}
 	}
 }
