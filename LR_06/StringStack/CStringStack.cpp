@@ -1,107 +1,103 @@
 #include "stdafx.h"
 #include "CStringStack.h"
 
+CStringStack::CStringStack()
+{
+	m_top = nullptr;
+}
+
 CStringStack::CStringStack(CStringStack const& stack)
 {
-	CopyStackItems(stack);
+	*(this) = stack;
 }
 
 CStringStack::CStringStack(CStringStack&& copyStack)
 {
-	m_top = copyStack.m_top;
-	m_stackSize = copyStack.m_stackSize;
+	m_top = std::move(copyStack.m_top);
 	copyStack.m_top = nullptr;
-	copyStack.m_stackSize = 0;
-}
-CStringStack::~CStringStack()
-{
-	Clear();
 }
 
-void CStringStack::Push(std::string const& element)
+void CStringStack::Push(const std::string& value)
 {
-	auto newNode = std::make_shared<StackItem>(element, m_top);
-	m_top = newNode;
-	m_stackSize++;
-}
-
-std::string CStringStack::GetTop() const
-{
-	if (IsEmpty())
-	{
-		throw std::logic_error("Stack is empty");
-	}
-
-	return m_top->stringContent;
+	auto newNode = std::make_unique<StackItem>(value, std::move(m_top));
+	m_top = move(newNode);
 }
 
 void CStringStack::Pop()
 {
-	if (IsEmpty())
+	if (!IsEmpty())
+	{
+		m_top = std::move(m_top->next);
+	}
+	else
 	{
 		throw std::logic_error("Stack is empty");
 	}
-
-	m_top = m_top->next;
-	m_stackSize--;
 }
 
-CStringStack& CStringStack::operator=(CStringStack const& copyStack)
+std::string CStringStack::GetTop() const
 {
-	if (this != &copyStack)
+	if (!IsEmpty())
 	{
-		Clear();
-		CopyStackItems(copyStack);
+		return m_top->data;
 	}
-
-	return *this;
-}
-
-CStringStack& CStringStack::operator=(CStringStack&& moveStack)
-{
-	if (this != &moveStack)
+	else
 	{
-		m_stackSize = moveStack.m_stackSize;
-		m_top = moveStack.m_top;
-		moveStack.m_top = nullptr;
-		moveStack.m_stackSize = 0;
+		throw std::logic_error("Stack is empty");
 	}
-
-	return *this;
 }
 
 bool CStringStack::IsEmpty() const
 {
-	return (m_stackSize == 0);
+	return (m_top == nullptr);
 }
 
 void CStringStack::Clear()
 {
-	while (!IsEmpty())
+	while (m_top)
 	{
 		Pop();
 	}
 }
 
-void CStringStack::CopyStackItems(CStringStack const& stack)
+CStringStack::~CStringStack()
 {
-	if (!stack.IsEmpty())
+	Clear();
+}
+
+CStringStack& CStringStack::operator=(const CStringStack& stack)
+{
+	if (stack.IsEmpty())
 	{
-		std::shared_ptr<StackItem> copiedItem = stack.m_top;
-
-		m_top = std::make_shared<StackItem>(*copiedItem);
-		auto pasteItem = m_top;
-
-		pasteItem->stringContent = copiedItem->stringContent;
-
-		while (copiedItem->next != nullptr)
-		{
-			pasteItem->next = std::make_shared<StackItem>(*copiedItem->next);
-
-			copiedItem = copiedItem->next;
-			pasteItem = pasteItem->next;
-		}
-
-		m_stackSize = stack.m_stackSize;
+		Clear();
+		return *this;
 	}
+
+	if (this != std::addressof(stack))
+	{
+		StackItem* node = stack.m_top.get();
+		std::unique_ptr<StackItem> element = std::make_unique<StackItem>(node->data, nullptr);
+		std::unique_ptr<StackItem> top = std::make_unique<StackItem>(element->data, nullptr);
+
+		node = node->next.get();
+		while (node)
+		{
+			element->next = std::make_unique<StackItem>(node->data, nullptr);
+			element = std::move(element->next);
+			node = node->next.get();
+		}
+		Clear();
+		m_top.swap(top);
+	}
+	return *this;
+}
+
+CStringStack& CStringStack::operator=(CStringStack&& stack)
+{
+	if (this != std::addressof(stack))
+	{
+		m_top.swap(stack.m_top);
+		stack.Clear();
+	}
+	return *this;
 }

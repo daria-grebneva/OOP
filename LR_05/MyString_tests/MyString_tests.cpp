@@ -307,11 +307,18 @@ TEST_CASE(" ", "[My String]")
 		}
 		SECTION("[] out of range of string")
 		{
-			CMyString str("string");
-			REQUIRE_THROWS_AS(str[-1] = 'a', std::out_of_range);
-			REQUIRE_THROWS_AS(str[100] = 'a', std::out_of_range);
-			auto ch = 'g';
-			REQUIRE_THROWS_AS(str[6] = ch, std::out_of_range);
+			SECTION("when we try to write")
+			{
+				CMyString str("string");
+				REQUIRE_THROWS_AS(str[-1] = 'a', std::out_of_range);
+				REQUIRE_THROWS_AS(str[100] = 'a', std::out_of_range);
+			}
+			SECTION("when we try to read")
+			{
+				CMyString str("string");
+				REQUIRE_THROWS_AS(str[-1], std::out_of_range);
+				REQUIRE_THROWS_AS(str[100], std::out_of_range);
+			}
 		}
 	}
 }

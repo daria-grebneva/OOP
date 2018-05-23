@@ -4,37 +4,32 @@
 class CStringStack
 {
 public:
-	CStringStack() = default;
+	CStringStack();
+	~CStringStack();
 
 	CStringStack(CStringStack const& stack);
 	CStringStack(CStringStack&& copyStack);
 
-	void Push(std::string const& element);
-	void Pop();
-	std::string GetTop() const;
-
 	CStringStack& operator=(CStringStack const& copyStack);
 	CStringStack& operator=(CStringStack&& moveStack);
 
+	void Push(const std::string& value);
+	void Pop();
+	std::string GetTop() const;
 	bool IsEmpty() const;
 	void Clear();
-
-	~CStringStack();
 
 private:
 	struct StackItem
 	{
-		StackItem(std::string const& str, std::shared_ptr<StackItem> const& nextNode)
-			: stringContent(str)
-			, next(nextNode)
+		StackItem(const std::string str, std::unique_ptr<StackItem>&& next)
+			: data(str)
+			, next(std::move(next))
 		{
 		}
-		std::string stringContent;
-		std::shared_ptr<StackItem> next = nullptr;
+		std::string data;
+		std::unique_ptr<StackItem> next;
 	};
 
-	void CopyStackItems(CStringStack const& stack);
-
-	size_t m_stackSize = 0;
-	std::shared_ptr<StackItem> m_top = nullptr;
+	std::unique_ptr<StackItem> m_top;
 };
