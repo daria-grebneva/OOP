@@ -146,14 +146,14 @@ void CMyArray<T>::Append(const T& value)
 template <typename T>
 T& CMyArray<T>::GetBack()
 {
-	assert(GetSize() != 0u);
+	assert(GetSize() != 0);
 	return m_end[-1];
 }
 
 template <typename T>
 const T& CMyArray<T>::GetBack() const
 {
-	assert(GetSize() != 0u);
+	assert(GetSize() != 0);
 	return m_end[-1];
 }
 

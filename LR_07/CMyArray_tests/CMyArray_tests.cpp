@@ -44,12 +44,12 @@ TEST_CASE("[CMyArray]")
 		SECTION("by default array is empty")
 		{
 			CMyArray<ArrayItem> arr;
-			REQUIRE(arr.GetSize() == 0u);
+			REQUIRE(arr.GetSize() == 0);
 		}
 		SECTION("by default array has 0 capacity")
 		{
 			CMyArray<ArrayItem> arr;
-			REQUIRE(arr.GetCapacity() == 0u);
+			REQUIRE(arr.GetCapacity() == 0);
 		}
 	}
 	SECTION("After appending an item into array")
@@ -58,17 +58,17 @@ TEST_CASE("[CMyArray]")
 		{
 			CMyArray<ArrayItem> arr;
 			arr.Append(ArrayItem());
-			REQUIRE(arr.GetSize() == 1u);
-			REQUIRE(arr.GetCapacity() == 1u);
+			REQUIRE(arr.GetSize() == 1);
+			REQUIRE(arr.GetCapacity() == 1);
 			arr.Append(ArrayItem());
-			REQUIRE(arr.GetSize() == 2u);
-			REQUIRE(arr.GetCapacity() == 2u);
+			REQUIRE(arr.GetSize() == 2);
+			REQUIRE(arr.GetCapacity() == 2);
 			arr.Append(ArrayItem());
-			REQUIRE(arr.GetSize() == 3u);
-			REQUIRE(arr.GetCapacity() == 4u);
+			REQUIRE(arr.GetSize() == 3);
+			REQUIRE(arr.GetCapacity() == 4);
 			arr.Append(ArrayItem());
-			REQUIRE(arr.GetSize() == 4u);
-			REQUIRE(arr.GetCapacity() == 4u);
+			REQUIRE(arr.GetSize() == 4);
+			REQUIRE(arr.GetCapacity() == 4);
 		}
 		SECTION("Can take back data")
 		{
