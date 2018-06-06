@@ -5,7 +5,7 @@
 using namespace std;
 
 const Sportsman sportsman1 = { "Niina Aaltonen", 60.8, static_cast<float>(175.62) };
-const Sportsman sportsman2 = { "Mike Adams", 80.5, static_cast<float>(186.7) };
+const Sportsman sportsman2 = { "Mike Adams", 80.5, static_cast<float>(186.7f) };
 const Sportsman sportsman3 = { "Dino Aguilar", 96.8, static_cast<float>(190.32) };
 
 const std::vector<Sportsman> sportsmans = { sportsman1, sportsman2, sportsman3 };

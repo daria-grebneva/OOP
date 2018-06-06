@@ -115,7 +115,7 @@ void CMyArray<T>::Append(const T& value)
 {
 	if (m_end == m_capacityEnd)
 	{
-		size_t newCapacity = std::max<int64_t>(1u, GetCapacity() * 2);
+		size_t newCapacity = std::max<int64_t>(1, GetCapacity() * 2);
 
 		auto newBegin = RawAlloc(newCapacity);
 		T* newEnd = newBegin;
